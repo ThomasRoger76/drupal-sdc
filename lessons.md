@@ -31,3 +31,24 @@ Erreurs SDC découvertes en projet Drupal 10.3+/D11.
 - **Cause :** Le registre SDC est mis en cache — Drupal ne découvre pas les nouveaux composants automatiquement
 - **Correct :** `drush cr` après chaque création ou renommage de composant SDC
 - **Prévention :** En développement, ajouter `auto_reload: true` dans `services.yml` pour Twig + `drush cr` après création
+
+### 2026-05-16 — Slot non rendu — `{{ badge }}` au lieu de `{{ slots.badge }}`
+
+- **Symptôme :** Le contenu passé dans un slot SDC n'apparaît pas dans le template
+- **Cause :** `{{ badge }}` dans le template Twig au lieu de `{{ slots.badge }}`
+- **Correct :** Dans les templates SDC : toujours `{{ slots.NOM_SLOT }}` pour les slots déclarés dans `.component.yml`
+- **Prévention :** Props = `{{ title }}` / Slots = `{{ slots.footer }}`
+
+### 2026-05-16 — CSS SDC non chargé — fichier mal nommé
+
+- **Symptôme :** Les styles du composant ne s'appliquent pas
+- **Cause :** Le fichier CSS s'appelle `styles.css` au lieu de `card.css` — doit avoir le même nom que le répertoire
+- **Correct :** Renommer en `card.css` (même nom que le répertoire, le `.twig`, et le `.component.yml`)
+- **Prévention :** Convention SDC stricte : `components/card/card.css`, `card/card.twig`, `card/card.component.yml`
+
+### 2026-05-16 — Props validation silencieuse en prod — bug invisible
+
+- **Symptôme :** Une prop avec mauvais type dégrade l'affichage sans erreur visible
+- **Cause :** `sdc.debug: false` en production désactive la validation stricte des props
+- **Correct :** Écrire des tests Functional qui vérifient le rendu SDC avec données invalides
+- **Prévention :** `sdc.debug: true` en dev (`services.yml`), tests PHPUnit pour les cas limites en prod
