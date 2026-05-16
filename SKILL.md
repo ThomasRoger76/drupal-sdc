@@ -9,6 +9,8 @@ description: Use when creating Single Directory Components (SDC) in Drupal 10.3+
 
 Référentiel complet des Single Directory Components Drupal 10.3+/D11 : structure d'un composant, props typées, slots, intégration Twig, JavaScript, CSS, et Storybook. SDC est l'avenir du theming Drupal — il co-localise template, styles, scripts et définition dans un seul répertoire.
 
+> **Note d'adoption (2024-2025) :** SDC est stable en D11 mais son adoption terrain est encore faible — la majorité des projets en production utilisent encore le theming Twig classique avec Bootstrap5. SDC est recommandé pour les **nouveaux projets D11** ; pour les projets existants D10, évaluer la migration au cas par cas.
+
 ## 🎯 La Règle Fondamentale
 
 > **Un composant = un répertoire auto-suffisant.** SDC co-localise TOUT ce qui concerne un composant : template Twig, CSS, JS, props schema, et stories Storybook. Finies les recherches dans 5 répertoires différents.
@@ -35,6 +37,12 @@ Référentiel complet des Single Directory Components Drupal 10.3+/D11 : structu
 | Props SDC configurables dans l'UI Layout Builder | `blockForm()` + `blockSubmit()` + `#type: component` | [sdc-layout-builder.md](sdc-layout-builder.md) |
 | Activer SDC en dev (validation stricte) | `services.yml` → `sdc.debug: true` | [sdc-setup.md](sdc-setup.md) |
 | Lister tous les composants disponibles | `drush php:eval "print_r(\Drupal::service('sdc.component_registry')->getAllComponents());"` | [sdc-setup.md](sdc-setup.md) |
+| **Documenter visuellement les composants** | Storybook + `*.stories.js` co-localisé dans le composant | [sdc-storybook.md](sdc-storybook.md) |
+| **Lancer Storybook dans Docker** | Service `node:22-alpine` + `npm run storybook` port 6006 | [sdc-storybook.md](sdc-storybook.md) |
+| Story avec plusieurs variantes (default/featured) | `export const Featured = Template.bind({}); Featured.args = {...}` | [sdc-storybook.md](sdc-storybook.md) |
+| **JS Drupal.behaviors dans un SDC** | `Drupal.behaviors.monComposant = { attach: (context) => { once(...) } }` | [sdc-setup.md](sdc-setup.md) |
+| Props objet imbriqué (image avec alt + url) | `props: { image: { type: object, properties: { url, alt } } }` | [sdc-setup.md](sdc-setup.md) |
+| Slot facultatif avec valeur par défaut Twig | `{% if slots.footer is defined %}...{% else %}...{% endif %}` | [sdc-integration.md](sdc-integration.md) |
 
 ## Anatomie d'un Composant SDC
 
