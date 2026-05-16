@@ -30,7 +30,9 @@ Référentiel complet des Single Directory Components Drupal 10.3+/D11 : structu
 | Documenter visuellement dans Storybook | `*.stories.js` dans le répertoire | [sdc-storybook.md](sdc-storybook.md) |
 | Debug des erreurs de validation de props | `DRUPAL_SDC_DEBUG=1` ou `services.yml` | [sdc-setup.md](sdc-setup.md) |
 | SDC dans un module (pas un thème) | `web/modules/custom/mon_module/components/` | [sdc-integration.md](sdc-integration.md) |
-| SDC avec Layout Builder | Block plugin utilisant un composant SDC | [sdc-integration.md](sdc-integration.md) |
+| SDC avec Layout Builder — block plugin | Classe Block PHP qui render un composant SDC | [sdc-layout-builder.md](sdc-layout-builder.md) |
+| SDC comme région de layout (Section plugin) | `LayoutBase::build()` qui retourne un `#type: component` | [sdc-layout-builder.md](sdc-layout-builder.md) |
+| Props SDC configurables dans l'UI Layout Builder | `blockForm()` + `blockSubmit()` + `#type: component` | [sdc-layout-builder.md](sdc-layout-builder.md) |
 | Activer SDC en dev (validation stricte) | `services.yml` → `sdc.debug: true` | [sdc-setup.md](sdc-setup.md) |
 | Lister tous les composants disponibles | `drush php:eval "print_r(\Drupal::service('sdc.component_registry')->getAllComponents());"` | [sdc-setup.md](sdc-setup.md) |
 
